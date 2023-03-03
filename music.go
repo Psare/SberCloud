@@ -92,7 +92,7 @@ func (p *Player) AddSong(path string) {
         return
     }
 
-    // Check if the file exists and is readable
+    
     if _, err := os.Stat(path); os.IsNotExist(err) {
         return
     }
@@ -129,8 +129,7 @@ func (p *Player) Prev() {
         return
     }
     if p.current.Prev() == nil {
-        // if the current element is the first element,
-        // set the current element to the last element of the playlist
+        
         p.current = p.playlist.Back()
     } else {
         p.current = p.current.Prev()
@@ -157,11 +156,12 @@ func main() {
 	quit := make(chan os.Signal, 1)
     p := NewPlayer()
 
-	// add some songs to the playlist
+	
 
 	r := gin.Default()
 	r.LoadHTMLFiles("sait.html")
-	// playplaylist endpoint
+
+	
 	r.GET("", func(ctx *gin.Context) {
 		songs := make([]string, 0)
         for e := p.playlist.Front(); e != nil; e = e.Next() {
@@ -175,12 +175,12 @@ func main() {
 		go p.PlayPlaylist()
 	})
 
-	// pause endpoint
+	
 	r.GET("/pause", func(c *gin.Context) {
 		p.Pause()
 	})
 
-	// resume endpoint
+	
 	r.GET("/resume", func(c *gin.Context) {
 		p.Resume()
 	})
@@ -191,14 +191,14 @@ func main() {
 		p.Next()
 	})
 
-	// addsong endpoint
+	
 	r.POST("/addSong", func(c *gin.Context) {
 		path := c.PostForm("path")
 		p.AddSong(path)
 		c.Redirect(http.StatusSeeOther, "/")
 	})
 
-	// delete endpoint
+	
 	r.GET("/delete", func(c *gin.Context) {
 		p.Delete()
 	})
