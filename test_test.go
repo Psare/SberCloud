@@ -4,7 +4,6 @@ import (
 	"os"
 	_"path/filepath"
 	"testing"
-	_"github.com/stretchr/testify/assert"
 	"time"
 )
 
