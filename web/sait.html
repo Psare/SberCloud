@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Music Player</title>
+    <style>
+      /* CSS styles for the music player */
+      #music-player {
+        background-color: rgb(1, 121, 37);
+        color: rgb(0, 0, 0);
+      }
+  /* CSS styles for the playlist */
+  h1 {
+	background-color: rgb(1, 121, 37);
+    color: rgb(0, 0, 0);
+	font-family: Arial, sans-serif;
+    font-size: 50px;
+  }
+  ul {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+  }
+
+  h2 {
+	background-color: rgb(1, 121, 37);
+    color: rgb(0, 0, 0);
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+  }
+  /* CSS styles for the song list */
+  h3 {
+	background-color: rgb(1, 121, 37);
+    color: rgb(0, 0, 0);
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+  }
+
+  li {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+  }
+</style>
+  </head>
+  <body>
+    <h1>Music Player</h1>
+    <div id="music-player">
+      <button onclick="playPlaylist()">Play</button>
+      <button onclick="pause()">Pause</button>
+      <button onclick="resume()">Resume</button>
+      <button onclick="prev()">Prev</button>
+      <button onclick="next()">Next</button>
+      <form action="/addSong" method="POST">
+          <input type="text" name="path" placeholder="Enter path to song file"> Example: "song0.mp3"
+          <button type="submit">Add</button>
+      </form>
+      <button onclick="deleteSong()">Delete Song</button>
+    </div>
+    <h2>Playlist</h2>
+    <ul>
+      {{range .songs}}
+      <li>{{.}}</li>
+      {{end}}
+    </ul>
+    <h3>Song List:</h3>
+    <ul>
+      <li>INSTASAMKA(song0.mp3)</li>
+      <li>ATOMIC_HEART(song1.mp3)</li>
+      <li>Chto-to(song2.mp3)</li>
+      <li>Brigada(song3.mp3)</li>
+      <li>Shura(song4.mp3)</li>
+      <li>Stigmata(song5.mp3)</li>
+      <li>Кино - Группа Крови(song6.mp3)</li>
+      <li>КиШ - Гимн Шута(song7.mp3)</li>
+	  <li>Боярский - такси(song8.mp3)</li>
+    </ul>
+    <script>
+      function playPlaylist() {
+        fetch('/playplaylist')
+          .then(response => response.json())
+          .then(data => console.log(data.message))
+          .catch(error => console.error(error));
+      }
+      function pause() {
+        fetch('/pause').then(response => response.json()).then(data => console.log(data));
+      }
+      function resume() {
+        fetch('/resume').then(response => response.json()).then(data => console.log(data));
+      }
+      function next() {
+        fetch('/next').then(response => response.json()).then(data => console.log(data));
+      }
+      function prev() {
+        fetch('/prev').then(response => response.json()).then(data => console.log(data));
+      }
+      function deleteSong() {
+        fetch('/delete').then(response => response.json()).then(data => console.log(data));
+      }
+    </script>
+    <div style="display: flex; justify-content: flex-center;">
+      <div style="width: 100%;">
+        <div class="tenor-gif-embed" data-postid="16881632" data-share-method="host" data-aspect-ratio="1" data-width="50%"><a href="https://tenor.com/view/cockroach-dancing-spinning-rgb-insect-gif-16881632">Cockroach Dancing Sticker</a>from <a href="https://tenor.com/search/cockroach-stickers">Cockroach Stickers</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+      </div>
+      <div style="width: 40%;">
+        <div class="tenor-gif-embed" data-postid="15829210" data-share-method="host" data-aspect-ratio="1" style="float: right;">
+            <a href="https://tenor.com/view/lizard-dance-dance-move-hands-up-raise-em-up-gif-15829210">Lizard Dance GIF</a> from <a href="https://tenor.com/search/lizard-gifs">Lizard GIFs</a>
+        </div>
+        <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+      </div>
+      <div style="width: 40%;">
+          <div class="tenor-gif-embed" data-postid="15829210" data-share-method="host" data-aspect-ratio="1" style="float: right;">
+              <a href="https://tenor.com/view/lizard-dance-dance-move-hands-up-raise-em-up-gif-15829210">Lizard Dance GIF</a> from <a href="https://tenor.com/search/lizard-gifs">Lizard GIFs</a>
+          </div>
+          <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+      </div>
+    </div>
+  </body>
+</html>
